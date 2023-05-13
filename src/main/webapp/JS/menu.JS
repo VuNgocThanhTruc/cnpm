@@ -1,5 +1,5 @@
-var menuOffX=0	//菜单距连接文字最左端距离
-var menuOffY=18	//菜单距连接文字顶端距离
+var menuOffX=0
+var menuOffY=18
 var fo_shadows=new Array()
 var linkset=new Array()
 var ie4=document.all&&navigator.userAgent.indexOf("Opera")==-1
@@ -173,22 +173,22 @@ function outbg(tdbg){
 tdbg.style.background='url(.Images/item_out.gif)'
 tdbg.style.border=''
 }
-var sysmenu='<table width=80><tr><td id=library onMouseOver=overbg(library) onMouseOut=outbg(library)><a href=library?action=libraryQuery>图书馆信息</a></td></tr>\
-<tr><td id=manager onMouseOver=overbg(manager) onMouseOut=outbg(manager)><a href=manager?action=managerQuery>管理员设置</a></td></tr>\
-<tr><td id=para onMouseOver=overbg(para) onMouseOut=outbg(para)><a href=parameter?action=parameterQuery>参数设置</a></td></tr>\
-<tr><td id=bookcase onMouseOver=overbg(bookcase) onMouseOut=outbg(bookcase)><a href=bookCase?action=bookCaseQuery>书架设置</a></td></tr>\
+var sysmenu='<table width=80><tr><td id=library onMouseOver=overbg(library) onMouseOut=outbg(library)><a href=library?action=libraryQuery>Thông tin thư viện</a></td></tr>\
+<tr><td id=manager onMouseOver=overbg(manager) onMouseOut=outbg(manager)><a href=manager?action=managerQuery>Cài đặt quản trị viên</a></td></tr>\
+<tr><td id=para onMouseOver=overbg(para) onMouseOut=outbg(para)><a href=parameter?action=parameterQuery>Cài đặt tham số</a></td></tr>\
+<tr><td id=bookcase onMouseOver=overbg(bookcase) onMouseOut=outbg(bookcase)><a href=bookCase?action=bookCaseQuery>Cài đặt giá sách</a></td></tr>\
 </table>'
-var readermenu='<table width=90><tr><td id=readerType onMouseOver=overbg(readerType) onMouseOut=outbg(readerType)><a href=reader?action=readerTypeQuery>读者类型管理</a></td></tr>\
-<tr><td id=reader onMouseOver=overbg(reader) onMouseOut=outbg(reader)><a href=reader?action=readerQuery>读者档案管理</a></td></tr>\
+var readermenu='<table width=90><tr><td id=readerType onMouseOver=overbg(readerType) onMouseOut=outbg(readerType)><a href=reader?action=readerTypeQuery>Quản lý loại người dùng</a></td></tr>\
+<tr><td id=reader onMouseOver=overbg(reader) onMouseOut=outbg(reader)><a href=reader?action=readerQuery>Quản lý tập tin đầu đọc</a></td></tr>\
 </table>'
-var bookmenu='<table width=90><tr><td id=bookType onMouseOver=overbg(bookType) onMouseOut=outbg(bookType)><a href=book?action=bookTypeQuery>图书类型设置</a></td></tr>\
-<tr><td id=book onMouseOver=overbg(book) onMouseOut=outbg(book)><a href=book?action=bookInfoQuery>图书档案管理</a></td></tr>\
+var bookmenu='<table width=90><tr><td id=bookType onMouseOver=overbg(bookType) onMouseOut=outbg(bookType)><a href=book?action=bookTypeQuery>Cài đặt loại sách</a></td></tr>\
+<tr><td id=book onMouseOver=overbg(book) onMouseOut=outbg(book)><a href=book?action=bookInfoQuery>Quản lý sách và tài liệu lưu trữ</a></td></tr>\
 </table>'
-var borrowmenu='<table width=60><tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href=bookBorrow.jsp>图书借阅</a></td></tr>\
-<tr><td id=renew onMouseOver=overbg(renew) onMouseOut=outbg(renew)><a href=bookRenew.jsp>图书续借</a></td></tr>\
-<tr><td id=giveback onMouseOver=overbg(giveback) onMouseOut=outbg(giveback)><a href=bookBack.jsp>图书归还</a></td></tr>\
+var borrowmenu='<table width=60><tr><td id=Borrow onMouseOver=overbg(Borrow) onMouseOut=outbg(Borrow)><a href=bookBorrow.jsp>Mượn sách</a></td></tr>\
+<tr><td id=renew onMouseOver=overbg(renew) onMouseOut=outbg(renew)><a href=bookRenew.jsp>Gia hạn sách</a></td></tr>\
+<tr><td id=giveback onMouseOver=overbg(giveback) onMouseOut=outbg(giveback)><a href=bookBack.jsp>Trả sách</a></td></tr>\
 </table>'
-var querymenu='<table width=90><tr><td id=bookQuery onMouseOver=overbg(bookQuery) onMouseOut=outbg(bookQuery)><a href=book?action=bookQueryAll>图书档案查询</a></td></tr>\
-<tr><td id=borrowQuery onMouseOver=overbg(borrowQuery) onMouseOut=outbg(borrowQuery)><a href=borrow?action=borrowQuery>图书借阅查询</a></td></tr>\
-<tr><td id=givebackQuery onMouseOver=overbg(givebackQuery) onMouseOut=outbg(givebackQuery)><a href=borrow?action=borrowRemind>借阅到期提醒</a></td></tr>\
+var querymenu='<table width=90><tr><td id=bookQuery onMouseOver=overbg(bookQuery) onMouseOut=outbg(bookQuery)><a href=book?action=bookQueryAll>Truy vấn kho lưu trữ sách</a></td></tr>\
+<tr><td id=borrowQuery onMouseOver=overbg(borrowQuery) onMouseOut=outbg(borrowQuery)><a href=borrow?action=borrowQuery>Yêu cầu mượn sách</a></td></tr>\
+<tr><td id=givebackQuery onMouseOver=overbg(givebackQuery) onMouseOut=outbg(givebackQuery)><a href=borrow?action=borrowRemind>Nhắc đến hạn</a></td></tr>\
 </table>'
