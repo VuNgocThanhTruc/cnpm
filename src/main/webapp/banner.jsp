@@ -15,7 +15,7 @@
 			bgcolor="#EEEEEE"><table width="73%" height="79" border="0"
 				cellpadding="0" cellspacing="0">
 				<tr>
-					<td height="69" align="right" valign="bottom">当前登录用户：<%=username%></td>
+					<td height="69" align="right" valign="bottom">Người dùng đang đăng nhập：<%=username%></td>
 				</tr>
 			</table></td>
 	</tr>

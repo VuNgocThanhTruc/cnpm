@@ -28,48 +28,48 @@
 				class="word_white"></div></td>
 		<script language="javascript">
 			function quit() {
-				if (confirm("是否退出系统?")) {
+				if (confirm("Bạn có chắc muốn đăng xuất khỏi hệ thống?")) {
 					window.location.href = "logout.jsp";
 				}
 			}
 		</script>
 		<td width="66%" align="right" bgcolor="#ad7c28" class="word_white"><a
-			href="main.jsp" class="word_white">首页</a> | <%
+			href="main.jsp" class="word_white">Trang chủ</a> | <%
 			if (mgf.getSystemSet() == 1) {
 		%><a
 			onmouseover=showmenu(event,sysmenu) onmouseout=delayhidemenu()
-			class="word_white" style="CURSOR: hand">系统设置</a> | <%
+			class="word_white" style="CURSOR: hand">Cài đặt hệ thống</a> | <%
 			}
 		%>
 			<%
 				if (mgf.getReaderSet() == 1) {
 			%><a onmouseover=showmenu(event,readermenu)
-			onmouseout=delayhidemenu() style="CURSOR: hand" class="word_white">读者管理</a>
+			onmouseout=delayhidemenu() style="CURSOR: hand" class="word_white">Quản lý độc giả</a>
 			| <%
 				}
 			%>
 			<%
 				if (mgf.getBookSet() == 1) {
 			%><a onmouseover=showmenu(event,bookmenu)
-			onmouseout=delayhidemenu() class="word_white" style="CURSOR: hand">图书管理</a>
+			onmouseout=delayhidemenu() class="word_white" style="CURSOR: hand">Quản lý thư viện</a>
 			| <%
 				}
 			%>
 			<%
 				if (mgf.getBorrowSet() == 1) {
 			%><a onmouseover=showmenu(event,borrowmenu)
-			onmouseout=delayhidemenu() class="word_white" style="CURSOR: hand">图书借还</a>
+			onmouseout=delayhidemenu() class="word_white" style="CURSOR: hand">Mượn sách</a>
 			| <%
 				}
 			%>
 			<%
 				if (mgf.getSystemQuery() == 1) {
 			%><a onmouseover=showmenu(event,querymenu)
-			onmouseout=delayhidemenu() class="word_white" style="CURSOR: hand">系统查询</a>
+			onmouseout=delayhidemenu() class="word_white" style="CURSOR: hand">Truy vấn hệ thống</a>
 			| <%
 				}
-			%><a href="manager?action=pwdquery" class="word_white">更改口令</a> |
-			<a href="#" onClick="quit()" class="word_white">退出系统</a></td>
+			%><a href="manager?action=pwdquery" class="word_white">Đổi mật khẩu</a> |
+			<a href="#" onClick="quit()" class="word_white">Đăng xuất</a></td>
 		<td width="2%" bgcolor="#ad7c28">&nbsp;</td>
 	</tr>
 	<tr bgcolor="#DFA40C">
