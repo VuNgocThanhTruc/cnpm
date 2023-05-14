@@ -7,10 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="library_manager_system" />
+        <module name="cnpm" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="cnpm" target="19" />
-    </bytecodeTargetLevel>
   </component>
 </project>
