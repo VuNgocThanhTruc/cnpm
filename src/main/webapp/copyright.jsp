@@ -5,13 +5,8 @@
   </tr>
       <tr>
         <td width="124" height="23">&nbsp;</td>
-        <td valign="bottom" align="center"> CopyRight &copy; 2019 www.KaerMorhen.xxbb.com 凯尔·莫罕图书馆</td>
+        <td valign="bottom" align="center"> CopyRight &copy; 2023 Nhom9CNPM</td>
         <td width="141">&nbsp;</td>
-      </tr>
-      <tr>
-        <td height="23">&nbsp;</td>
-        <td align="center">本站建议使用非IE内核浏览器操作</td>
-        <td>&nbsp;</td>
       </tr>
       <tr>
         <td height="8"></td>

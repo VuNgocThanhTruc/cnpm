@@ -24,9 +24,9 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao{
 			rs=executeQuery(sb.toString());
 			while(rs.next()) {
 				b=new BookForm();
-				b.setId(rs.getInt(13));
-				b.setBookBarcode(rs.getString(1));
-				b.setBookName(rs.getString(2));
+				b.setId(Integer.parseInt(rs.getString("id")));
+				b.setBookBarcode(rs.getString("barcode"));
+				b.setBookName(rs.getString("book_name"));
 				b.setPublishName(rs.getString(14));
 				b.setBookTypeName(rs.getString(15));
 				b.setBookcaseName(rs.getString(16));
@@ -130,10 +130,64 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao{
 		return 0;
 	}
 
-//	3.3. Gọi insert(BookForm bf)
+	//	3.3. Gọi insert(BookForm bf)
 	@Override
 	public int insert(BookForm bf) {
-		return 0;
+		// TODO Auto-generated method stub
+		boolean flag=false;
+		int result=0;
+		StringBuffer sb=new StringBuffer();
+		sb.append("select * from tb_bookinfo where barcode='");
+		sb.append(bf.getBookBarcode());
+		sb.append("'");
+		try {
+			rs=executeQuery(sb.toString());
+			flag=rs.next();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		if(flag) {
+			result=-1;
+
+		}else {
+			sb.setLength(0);
+			sb.append("insert into tb_bookinfo(barcode,book_name,type_id,author,translator,isbn,price,page,bookcase,intime,operator) values");
+			sb.append("('");
+			sb.append(bf.getBookBarcode());
+			sb.append("','");
+			sb.append(bf.getBookName());
+			sb.append("','");
+			sb.append(bf.getBookTypeId());
+			sb.append("','");
+			sb.append(bf.getAuthor());
+			sb.append("','");
+			sb.append(bf.getTranslator());
+			sb.append("','");
+			sb.append(bf.getIsbn());
+			sb.append("',");
+			sb.append(bf.getPrice());
+			sb.append(",'");
+			sb.append(bf.getPage());
+			sb.append("','");
+			sb.append(bf.getBookcaseId());
+			sb.append("','");
+			sb.append(bf.getIntime());
+			sb.append("','");
+			sb.append(bf.getOperator());
+			sb.append("')");
+			try {
+				result=executeUpdate(sb.toString());
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}finally {
+				close();
+			}
+		}
+
+//		3.4 return
+		return result;
 	}
 	@Override
 	public int update(BookForm bf) {
