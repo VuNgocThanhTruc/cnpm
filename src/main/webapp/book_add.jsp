@@ -63,7 +63,7 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center">loại sách：</td>
+                                                            <td align="center">Loại sách：</td>
                                                             <td>
                                                                 <select name="typeId" class="wenbenkuang" id="typeId">
                                                                     <c:forEach items="${btfs }" var="bt">
@@ -72,7 +72,7 @@
                                                                 </select></td>
                                                         </tr>
                                                         <tr>
-                                                                <td align="center">tác giả：</td>
+                                                                <td align="center">Tác giả：</td>
                                                             <td><input name="author" type="text" id="author" size="40">
                                                             </td>
                                                         </tr>
@@ -108,7 +108,7 @@
                                                                 </c:forEach>
 
                                                             </select>
-                                                                <input name="operator" type="hidden" id="operator"
+                                                                <input name="username" type="hidden" id="username"
                                                                        value="${username }"></td>
                                                         </tr>
                                                         <tr>

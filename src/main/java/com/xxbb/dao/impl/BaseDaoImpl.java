@@ -14,10 +14,7 @@ public class BaseDaoImpl implements BaseDao {
 	protected PreparedStatement ps;
 	protected ResultSet rs;
 	public BaseDaoImpl() {
-		
-		// 初始化数据库连接池
 		cm = ConnectionManager.getInstance();
-		
 	}
 	@Override
 	public void close() {

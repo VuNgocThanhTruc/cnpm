@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="library_manager_system-0.0.1-SNAPSHOT.war">
+    <root id="archive" name="cnpm-0.0.1-SNAPSHOT.war">
       <element id="artifact" artifact-name="cnpm:war exploded" />
     </root>
   </artifact>
