@@ -53,34 +53,34 @@
                                                                         size="30" value="${lf.curator }"></td>
                                             </tr>
                                             <tr>
-                                                <td align="left" style="padding:5px;">联系电话：</td>
+                                                <td align="left" style="padding:5px;">Số điện thoại：</td>
                                                 <td align="left"><input name="tel" type="text" id="tel" size="30"
                                                                         value="${lf.telephone }"></td>
                                             </tr>
                                             <tr>
-                                                <td align="left" style="padding:5px;">联系地址：</td>
+                                                <td align="left" style="padding:5px;">Địa chỉ：</td>
                                                 <td align="left"><input name="address" type="text" id="address"
                                                                         size="30" value="${lf.address }"></td>
                                             </tr>
                                             <tr>
-                                                <td align="left" style="padding:5px;">联系邮箱：</td>
+                                                <td align="left" style="padding:5px;">Email：</td>
                                                 <td align="left"><input name="email" type="text" id="email" size="30"
                                                                         value="${lf.email }"></td>
                                             </tr>
                                             <tr>
-                                                <td align="left" style="padding:5px;">图书馆网址：</td>
+                                                <td align="left" style="padding:5px;">Đường dẫn：</td>
                                                 <td align="left"><input name="url" type="text" id="url" size="30"
                                                                         value="${lf.url }"></td>
                                             </tr>
                                             <tr>
-                                                <td align="left" style="padding:5px;">建馆时间：</td>
+                                                <td align="left" style="padding:5px;">Ngày tạo：</td>
                                                 <td align="left"><input name="createDate" type="text" id="createDate"
                                                                         size="30" value="${lf.createDate }">
                                                     (日期格式：2011-02-22)
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td height="84" align="left" style="padding:5px;">图书馆简介：</td>
+                                                <td height="84" align="left" style="padding:5px;">Giới thiệu：</td>
                                                 <td align="left"><textarea name="introduce" cols="50" rows="5"
                                                                            class="wenbenkuang"
                                                                            id="introduce">${lf.introduce }</textarea>
