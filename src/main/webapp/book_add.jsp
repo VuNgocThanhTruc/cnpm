@@ -1,25 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <%@ page import="java.util.*" %>
 <html>
-<script language="jscript">
-    function check(form) {
-        if (form.barcode.value == "") {
-            alert("Vui lòng nhập barcode!");
-            form.barcode.focus();
-            return false;
-        }
-        if (form.bookName.value == "") {
-            alert("Vui lòng nhập tên sách!");
-            form.bookName.focus();
-            return false;
-        }
-        if (form.price.value == "") {
-            alert("Vui lòng nhập giá sách!");
-            form.price.focus();
-            return false;
-        }
-    }
-</script>
+
 <head>
     <title>Library Manager</title>
     <link href="CSS/style.css" rel="stylesheet">
@@ -28,7 +10,6 @@
 <%@include file="banner.jsp" %>
 <%@include file="navigation.jsp" %>
 
-<%--3. Điền thông tin và chọn vào nút thêm sách--%>
 <table width="778" border="0" cellspacing="0" cellpadding="0" align="center">
     <tr>
         <td valign="top" bgcolor="#FFFFFF">
@@ -45,7 +26,9 @@
                                     <table width="100%" height="493" border="0" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td align="center" valign="top">
-                                                <form name="form1" method="post" action="book?action=bookAdd">
+                                                <%--3. Điền thông tin sách và chọn vào nút "Thêm sách"--%>
+                                                <%--3.1.1 Gọi service(HttpServletRequest req, HttpServletResponse resp)--%>
+                                                <form name="formAddBook" method="post" action="book?action=bookAdd">
                                                     <table width="600" height="432" border="0" cellpadding="0"
                                                            cellspacing="0" bgcolor="#FFFFFF">
                                                         <tr>
@@ -72,7 +55,7 @@
                                                                 </select></td>
                                                         </tr>
                                                         <tr>
-                                                                <td align="center">Tác giả：</td>
+                                                            <td align="center">Tác giả：</td>
                                                             <td><input name="author" type="text" id="author" size="40">
                                                             </td>
                                                         </tr>
@@ -113,13 +96,18 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center">&nbsp;</td>
+
                                                             <td>
-<%--                                                                3.1 check()--%>
-                                                                <input name="Submit" type="submit" class="btn_grey"
-                                                                       value="Thêm sách" onClick="return check(form1)">
-                                                                &nbsp;
                                                                 <input name="Submit2" type="button" class="btn_grey"
-                                                                       value="Hủy" onClick="history.back()"></td>
+                                                                       value="Hủy" onClick="history.back()">
+                                                                &nbsp;
+                                                                <%--3.1 Gọi  check(formAddBook)--%>
+                                                                <input name="Submit" type="submit" class="btn_grey"
+                                                                       value="Thêm sách"
+                                                                       onClick="return check(formAddBook)">
+
+                                                            </td>
+
                                                         </tr>
                                                     </table>
                                                 </form>
@@ -136,6 +124,30 @@
         </td>
     </tr>
 </table>
+
+<script language="jscript">
+
+    function check(form) {
+        if (form.barcode.value == "") {
+            // 3.1.1 Hiển thị thông báo lỗi
+            alert("Vui lòng nhập barcode!");
+            form.barcode.focus();
+            return false;
+        }
+        if (form.bookName.value == "") {
+            // 3.1.1 Hiển thị thông báo lỗi
+            alert("Vui lòng nhập tên sách!");
+            form.bookName.focus();
+            return false;
+        }
+        if (form.price.value == "") {
+            // 3.1.1 Hiển thị thông báo lỗi
+            alert("Vui lòng nhập giá sách!");
+            form.price.focus();
+            return false;
+        }
+    }
+</script>
 
 </body>
 </html>

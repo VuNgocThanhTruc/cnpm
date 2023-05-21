@@ -19,7 +19,9 @@ public interface BookDao {
 	public List<BookForm> query(String[] str);//query all system
 
 	public List<BookForm> query(BookForm bf); //query all info book display library
-	//insert, delete, update book
+
+//	3.1.4 Gọi insert(BookForm)
+//	3.1.7 return kết quả insert thông tin sách
 	public int insert(BookForm bf);
 	public int update(BookForm bf);
 	public int delete(BookForm bf);
