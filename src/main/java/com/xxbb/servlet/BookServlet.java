@@ -79,6 +79,8 @@ public class BookServlet extends HttpServlet {
 			bookModify(req, resp);
 		} else if ("bookInfoQuery".equals(action)) {
 			bookInfoQuery(req, resp);
+		} else if ("bookDel".equals(action)) {
+			bookDel(req, resp);
 		}
 	}
 
@@ -103,17 +105,18 @@ public class BookServlet extends HttpServlet {
 
 		result = btd.insert(btf);
 		if (result == 0) {
-			req.setAttribute("error", "Add error！");
+			req.setAttribute("error", "Không thể thêm thông tin loại sách!");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else if (result == -1) {
-			req.setAttribute("error", "Add error！");
+			req.setAttribute("error", "Thông tin loại sách đã được thêm vào!");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
 			req.getRequestDispatcher("bookType_ok.jsp?para=1").forward(req, resp);
 		}
 
 	}
-
+    //    Nguyễn Thanh Liêm 
+	// 2.Book.jsp gởi thông tin id của sách đó lên bookservlet và gọi hàm bookTypeDelete() 
 	private void bookTypeDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int result = 0;
 		BookTypeForm btf = new BookTypeForm();
@@ -122,9 +125,11 @@ public class BookServlet extends HttpServlet {
 
 		result = btd.delete(btf);
 		if (result == 0) {
-			req.setAttribute("error", "Delete success！");
+			req.setAttribute("error", "Không thể xóa thông tin loại sách!");
+		// 3.2 Nếu thất bại thì trả về trang error.jsp 
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
+			//  3.1 Trả về thông báo thành công tới trang bookType_ok.jsp  
 			req.getRequestDispatcher("bookType_ok.jsp?para=3").forward(req, resp);
 		}
 	}
@@ -145,7 +150,7 @@ public class BookServlet extends HttpServlet {
 
 		result = btd.update(btf);
 		if (result == 0) {
-			req.setAttribute("error", "Edit error！");
+			req.setAttribute("error", "Không thể sửa đổi thông tin loại sách!");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
 			req.getRequestDispatcher("bookType_ok.jsp?para=2").forward(req, resp);
@@ -190,7 +195,7 @@ public class BookServlet extends HttpServlet {
 		bf.setId(Integer.valueOf(req.getParameter("id")));
 		List<BookForm> bfs = bookDao.query(bf);
 		if (bfs.isEmpty()) {
-			req.setAttribute("error", "Not list display！");
+			req.setAttribute("error", "Đã xảy ra lỗi khi xem thông tin cụ thể của cuốn sách, vui lòng thử lại!");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
 			req.setAttribute("b", bfs.get(0));
@@ -209,7 +214,7 @@ public class BookServlet extends HttpServlet {
 		bf.setId(Integer.valueOf(req.getParameter("id")));
 		List<BookForm> bfs = bookDao.query(bf);
 		if (btfs.isEmpty() || bcfs.isEmpty() || bfs.isEmpty() || pfs.isEmpty()) {
-			req.setAttribute("error", "Not list display！");
+			req.setAttribute("error", "Đã xảy ra lỗi khi nhập trang sửa đổi thông tin sách, vui lòng thử lại!");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
 			req.setAttribute("b", bfs.get(0));
@@ -239,13 +244,26 @@ public class BookServlet extends HttpServlet {
 		bf.setOperator((String) hs.getAttribute("username"));
 		result = bookDao.update(bf);
 		if (result == 0) {
-			req.setAttribute("error", "Edit book error！");
+			req.setAttribute("error", "Không thể sửa đổi thông tin sách, vui lòng thử lại! !");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else if (result == -1) {
-			req.setAttribute("error", "Edit book error！");
+			req.setAttribute("error", "Mã vạch sách đã tồn tại, vui lòng sửa đổi nó! !");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
 			req.getRequestDispatcher("book_ok.jsp?para=2").forward(req, resp);
+		}
+	}
+
+	private void bookDel(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int result = 0;
+		BookForm bf = new BookForm();
+		bf.setId(Integer.valueOf(req.getParameter("id")));
+		result = bd.delete(bf);
+		if (result == 0) {
+			req.setAttribute("error", "Không thể xóa thông tin sách, vui lòng thử lại! !");
+			req.getRequestDispatcher("error.jsp").forward(req, resp);
+		} else {
+			req.getRequestDispatcher("book_ok.jsp?para=3").forward(req, resp);
 		}
 	}
 
@@ -265,7 +283,7 @@ public class BookServlet extends HttpServlet {
 		List<PublishingForm> pfs = pd.query(new PublishingForm());
 		List<BookcaseForm> bcfs = bcd.query(new BookcaseForm());
 		if (btfs.isEmpty() || bcfs.isEmpty() || pfs.isEmpty()) {
-			req.setAttribute("error", "Có lỗi trong quá trình thêm sách！");
+			req.setAttribute("error", "Đã xảy ra lỗi khi nhập trang sửa đổi thông tin sách, vui lòng thử lại!");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
 			req.setAttribute("bcfs", bcfs);
@@ -278,7 +296,6 @@ public class BookServlet extends HttpServlet {
 
 	}
 
-//3.2. Gọi bookAdd()
 	private void bookAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int result = 0;
 		BookForm bookForm = new BookForm();

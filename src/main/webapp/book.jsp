@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <html>
 <head>
-    <title>Library Manager</title>
-    <link href="CSS/style.css" rel="stylesheet">
+<title>hệ thống quản lý thư viện</title>
+<link href="CSS/style.css" rel="stylesheet">
 </head>
 <body onLoad="clockon(bgclock)">
 <%@include file="banner.jsp" %>
@@ -65,6 +65,8 @@
 
                                                 <td align="center"><a
                                                         href="book?action=bookModifyQuery&id=${b.id }">Sửa</a></td>
+                                                <!-- Nguyễn Thanh Liêm 
+                                                1.Nhấn vào nút xóa sách ở trang book.jsp  -->
                                                 <td align="center"><a href="book?action=bookDel&id=${b.id }">Xóa</a>
                                                 </td>
                                             </tr>
