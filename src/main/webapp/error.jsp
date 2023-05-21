@@ -5,7 +5,7 @@ String error=(String)request.getAttribute("error");
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>错误提示</title>
+<title>Thông báo lỗi</title>
 <link href="CSS/style.css" rel="stylesheet">
 </head>
 
@@ -17,9 +17,9 @@ String error=(String)request.getAttribute("error");
       <tr>
         <td align="center" background="Images/error.jpg"><table width="388" height="194" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td align="center"><img src="Images/error_b.gif" width="31" height="31">&nbsp;&nbsp;错误提示信息： <%=error%> <br>
+            <td align="center"><img src="Images/error_b.gif" width="31" height="31">&nbsp;&nbsp;Thông báo lỗi: <%=error%> <br>
               <br>
-              <input name="Submit" type="submit" class="btn_grey" value="返回" onClick="history.back(-1)"></td>
+              <input name="Submit" type="submit" class="btn_grey" value="trở lại" onClick="history.back(-1)"></td>
           </tr>
         </table></td>
       </tr>
