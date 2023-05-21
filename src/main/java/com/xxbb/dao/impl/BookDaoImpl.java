@@ -15,7 +15,7 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao{
 		BookForm b=null;
 		if(bf.getId()==null&&bf.getBookBarcode()==null) {
 			sb.append("SELECT b.*,p.publish_name,bt.type_name,bc.name from tb_bookinfo b left join tb_booktype bt  on bt.id=b.type_id join tb_bookcase bc on bc.id=b.bookcase join tb_publishing p on p.isbn=b.ISBN");
-			System.out.println("Truy vấn tất cả thông tin sách："+sb);
+			System.out.println("Select info book："+sb);
 		}else if(bf.getId()!=null) {
 			sb.append("SELECT b.*,p.publish_name,bt.type_name,bc.name from tb_bookinfo b left join tb_booktype bt  on bt.id=b.type_id join tb_bookcase bc on bc.id=b.bookcase join tb_publishing p on p.isbn=b.ISBN where b.id=");
 			sb.append(bf.getId());
@@ -130,7 +130,6 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao{
 		return 0;
 	}
 
-	//	3.3. Gọi insert(BookForm bf)
 	@Override
 	public int insert(BookForm bf) {
 		// TODO Auto-generated method stub
@@ -177,6 +176,7 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao{
 			sb.append(bf.getOperator());
 			sb.append("')");
 			try {
+//				3.1.5 Insert sách mới vào database
 				result=executeUpdate(sb.toString());
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -186,7 +186,7 @@ public class BookDaoImpl extends BaseDaoImpl implements BookDao{
 			}
 		}
 
-//		3.4 return
+//		3.1.6 return kết quả insert thông tin sách
 		return result;
 	}
 	@Override

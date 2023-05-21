@@ -31,7 +31,7 @@ import com.xxbb.util.TimeUtil;
 public class BookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BookTypeDao btd = null;
-	private BookDao bd = null;
+	private BookDao bookDao = null;
 	private PublishingDao pd = null;
 	private BookcaseDao bcd = null;
 
@@ -40,7 +40,7 @@ public class BookServlet extends HttpServlet {
 	 */
 	public BookServlet() {
 		btd = new BookTypeDaoImpl();
-		bd = new BookDaoImpl();
+		bookDao = new BookDaoImpl();
 		pd = new PublishingDaoImpl();
 		bcd = new BookcaseDaoImpl();
 	}
@@ -63,6 +63,12 @@ public class BookServlet extends HttpServlet {
 			bookTypeModify(req, resp);
 		} else if ("bookQuery".equals(action)) {
 			bookQuery(req, resp);
+		} else if ("bookAddQuery".equals(action)) {
+			//	1.2 Gọi bookAddQuery(HttpServletRequest req, HttpServletResponse resp)
+			bookAddQuery(req, resp);
+		} else if ("bookAdd".equals(action)) {
+			//3.1.2 Gọi bookAdd(HttpServletRequest req, HttpServletResponse resp)
+			bookAdd(req, resp);
 		} else if ("bookDetail".equals(action)) {
 			bookDetail(req, resp);
 		} else if ("bookQueryAll".equals(action)) {
@@ -71,14 +77,9 @@ public class BookServlet extends HttpServlet {
 			bookModifyQuery(req, resp);
 		} else if ("bookModify".equals(action)) {
 			bookModify(req, resp);
-		} else if ("bookAdd".equals(action)) {
-			bookAdd(req, resp);
 		} else if ("bookInfoQuery".equals(action)) {
 			bookInfoQuery(req, resp);
-		} else if ("bookAddQuery".equals(action)) {
-			bookAddQuery(req, resp);
 		}
-
 	}
 
 	private void bookTypeQuery(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -157,7 +158,7 @@ public class BookServlet extends HttpServlet {
 		funcs[0] = req.getParameter("f");
 		funcs[1] = req.getParameter("key");
 
-		List<BookForm> bfs = bd.query(funcs);
+		List<BookForm> bfs = bookDao.query(funcs);
 		if (bfs.isEmpty()) {
 			req.setAttribute("func", funcs[0]);
 			req.setAttribute("value", funcs[1]);
@@ -173,7 +174,7 @@ public class BookServlet extends HttpServlet {
 	}
 
 	private void bookQueryAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<BookForm> bfs = bd.query(new BookForm());
+		List<BookForm> bfs = bookDao.query(new BookForm());
 		if (bfs.isEmpty()) {
 			req.setAttribute("fflag", "no");
 			req.getRequestDispatcher("bookQuery.jsp").forward(req, resp);
@@ -187,7 +188,7 @@ public class BookServlet extends HttpServlet {
 	private void bookDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		BookForm bf = new BookForm();
 		bf.setId(Integer.valueOf(req.getParameter("id")));
-		List<BookForm> bfs = bd.query(bf);
+		List<BookForm> bfs = bookDao.query(bf);
 		if (bfs.isEmpty()) {
 			req.setAttribute("error", "Not list display！");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
@@ -206,7 +207,7 @@ public class BookServlet extends HttpServlet {
 
 		BookForm bf = new BookForm();
 		bf.setId(Integer.valueOf(req.getParameter("id")));
-		List<BookForm> bfs = bd.query(bf);
+		List<BookForm> bfs = bookDao.query(bf);
 		if (btfs.isEmpty() || bcfs.isEmpty() || bfs.isEmpty() || pfs.isEmpty()) {
 			req.setAttribute("error", "Not list display！");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
@@ -236,7 +237,7 @@ public class BookServlet extends HttpServlet {
 		bf.setPage(Integer.valueOf(req.getParameter("page")));
 		bf.setBookcaseId(Integer.valueOf(req.getParameter("bookcaseid")));
 		bf.setOperator((String) hs.getAttribute("username"));
-		result = bd.update(bf);
+		result = bookDao.update(bf);
 		if (result == 0) {
 			req.setAttribute("error", "Edit book error！");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
@@ -249,7 +250,7 @@ public class BookServlet extends HttpServlet {
 	}
 
 	private void bookInfoQuery(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<BookForm> bfs = bd.query(new BookForm());
+		List<BookForm> bfs = bookDao.query(new BookForm());
 		if (bfs.isEmpty()) {
 			req.setAttribute("fflag", "no");
 			req.getRequestDispatcher("book.jsp").forward(req, resp);
@@ -259,7 +260,6 @@ public class BookServlet extends HttpServlet {
 		}
 	}
 
-//	2. HIển thị giao diện thêm thông tin sách book_add.jsp
 	private void bookAddQuery(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<BookTypeForm> btfs = btd.query(new BookTypeForm());
 		List<PublishingForm> pfs = pd.query(new PublishingForm());
@@ -271,6 +271,8 @@ public class BookServlet extends HttpServlet {
 			req.setAttribute("bcfs", bcfs);
 			req.setAttribute("btfs", btfs);
 			req.setAttribute("pfs", pfs);
+
+			//	2. Chuyển hướng đến giao diện thêm sách book_add.jsp
 			req.getRequestDispatcher("book_add.jsp").forward(req, resp);
 		}
 
@@ -279,32 +281,36 @@ public class BookServlet extends HttpServlet {
 //3.2. Gọi bookAdd()
 	private void bookAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int result = 0;
-		BookForm bf = new BookForm();
+		BookForm bookForm = new BookForm();
 		HttpSession hs = req.getSession();
 		String date = TimeUtil.getDate();
 
-		bf.setBookBarcode(req.getParameter("barcode"));
-		bf.setBookName(req.getParameter("bookName"));
-		bf.setBookTypeId(Integer.valueOf(req.getParameter("typeId")));
-		bf.setAuthor(req.getParameter("author"));
-		bf.setTranslator(req.getParameter("translator"));
-		bf.setIsbn((req.getParameter("isbn")));
-		bf.setPrice(Double.valueOf(req.getParameter("price")));
-		bf.setPage(Integer.valueOf(req.getParameter("page")));
-		bf.setBookcaseId(Integer.valueOf(req.getParameter("bookcaseid")));
-		bf.setOperator((String) hs.getAttribute("username"));
-		bf.setIntime(date);
+		bookForm.setBookBarcode(req.getParameter("barcode"));
+		bookForm.setBookName(req.getParameter("bookName"));
+		bookForm.setBookTypeId(Integer.valueOf(req.getParameter("typeId")));
+		bookForm.setAuthor(req.getParameter("author"));
+		bookForm.setTranslator(req.getParameter("translator"));
+		bookForm.setIsbn((req.getParameter("isbn")));
+		bookForm.setPrice(Double.valueOf(req.getParameter("price")));
+		bookForm.setPage(Integer.valueOf(req.getParameter("page")));
+		bookForm.setBookcaseId(Integer.valueOf(req.getParameter("bookcaseid")));
+		bookForm.setOperator((String) hs.getAttribute("username"));
+		bookForm.setIntime(date);
 
-		result = bd.insert(bf);
+//		3.1.3 Gọi insert(bookForm)
+//		3.1.8 return kết quả insert thông tin sách
+		result = bookDao.insert(bookForm);
 
-//		3.5 Hiển thị thông báo thêm sách
 		if (result == 0) {
+//		3.1.9 Chuyển hướng đến trang error.jsp hiển thị thông báo thêm sách lỗi
 			req.setAttribute("error", "Có lỗi trong quá trình thêm sách！");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else if (result == -1) {
+//		3.1.9 Chuyển hướng đến trang error.jsp hiển thị thông báo thêm sách lỗi
 			req.setAttribute("error", "Barcode không được trùng！");
 			req.getRequestDispatcher("error.jsp").forward(req, resp);
 		} else {
+//			3.1.10 Chuyển hướng đến trang book_ok.jsp hiển thị thông báo thêm sách thành công
 			req.getRequestDispatcher("book_ok.jsp?para=1").forward(req, resp);
 		}
 	}
