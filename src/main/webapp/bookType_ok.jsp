@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <html>
 <head>
-<title>操作成功!</title>
+<title>hoạt động thành công!</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
@@ -12,7 +12,7 @@ switch(para){
 	case 1:
 	%>
 		<script language="javascript">
-		alert("图书类型信息添加成功!");
+		alert("Đã thêm thông tin loại sách thành công!");
 		opener.location.reload();
 		window.close();
 		</script>	
@@ -20,7 +20,7 @@ switch(para){
 	case 2:
 	%>
 		<script language="javascript">
-		alert("图书类型信息修改成功!");
+		alert("Thông tin loại sách đã sửa đổi thành công!");
 		opener.location.reload();
 		window.close();
 		</script>		
@@ -28,7 +28,7 @@ switch(para){
 	case 3:
 	%>
 		<script language="javascript">
-		alert("图书类型信息删除成功!");
+		alert("Đã xóa thông tin loại sách thành công!");
 		window.location.href="book?action=bookTypeQuery";
 		</script>		
 	<%	break;
